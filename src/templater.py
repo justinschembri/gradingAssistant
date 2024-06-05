@@ -164,7 +164,7 @@ def construct_grade_template(lab:str, repeat_column:int, spacing:int) -> None:
     workbook.save(load_path)
 
 if __name__ == "__main__":
-    x = input("Which lab number do you want to generate a template for?")
+    x = input("Which lab number do you want to generate a template for? ")
     lab_name = "lab" + x
     construct_schema_sheet(lab_name)
     construct_grade_template(lab=lab_name, repeat_column=1, spacing=6)
