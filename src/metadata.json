@@ -5,8 +5,8 @@
         "3": ["lab5", "lab6"],
         "4": ["lab7", "lab8"]
     },
-    "groups": 18,
-    "numQuestions": {
+    "totalGroups": 18,
+    "questionArray": {
         "lab1": ["1a", "1b", "1c", "2a", "2b", "2c", "2d", "2e", "3a", "3b"],
         "lab2": ["A1", "A2a", "A2b", "A2c", "A2d", "A2e", "B2a", "B2b", "B2c", "B2d", "B2e"],
         "lab3": ["2", "3", "4.1", "4.2", "4.3", "5.1", "5.2", "6.1", "6.2"],
@@ -15,5 +15,13 @@
         "lab6": ["1a", "1b", "2", "3", "4"],
         "lab7": ["1a", "1b", "2", "3", "4"],
         "lab8": ["1a", "1b", "2", "3", "4"]
-    }
+    },
+    "schemaArray": [
+        "question", 
+        "marks available", 
+        "question summary", 
+        "marking rubrick", 
+        "mark", 
+        "feedback"
+    ]
 }
