@@ -172,8 +172,12 @@ def style_sheets(lab:int | str, output_dir:Path) -> None:
             c.font = Font(size= 15)
             c.alignment = Alignment(wrap_text=True)
     # ALTERNATING COLORS
-    fill_light = PatternFill(start_color="D3D3D3", end_color="D3D3D3", fill_type="solid")
-    fill_dark = PatternFill(start_color="A9A9A9", end_color="A9A9A9", fill_type="solid")
+    fill_light = PatternFill(
+        start_color="D3D3D3", end_color="D3D3D3", fill_type="solid"
+        )
+    fill_dark = PatternFill(
+        start_color="A9A9A9", end_color="A9A9A9", fill_type="solid"
+        )
     for i, row in enumerate(grading_sheet.iter_rows(min_row=2), start=2): # type: ignore
         fill = fill_light if i % 2 == 0 else fill_dark
         for cell in row:
@@ -184,7 +188,9 @@ def style_sheets(lab:int | str, output_dir:Path) -> None:
     for column in grading_sheet.iter_cols(min_row=1, max_row=1): # type: ignore
         for cell in column:
             if cell.value == 'feedback' or cell.value == 'groups':
-                for row in grading_sheet.iter_rows(min_row=2, min_col=cell.column, max_col=cell.column): # type: ignore
+                for row in grading_sheet.iter_rows(
+                    min_row=2, min_col=cell.column, max_col=cell.column
+                    ): # type: ignore
                     for cell in row:
                         cell.border = border_right
     workbook.save(load_path)
