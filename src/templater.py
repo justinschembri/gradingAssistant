@@ -53,7 +53,10 @@ def create_schema_sheet(
         [questions, marks_available, summary, schema, marks, feedback], axis=1
         )
     save_path = output_dir / (lab + ".xlsx")
-    output.to_excel(save_path, sheet_name="schema", index=False)
+    if save_path.exists:
+        raise FileExistsError("Workbook already exists! Delete it first.")
+    else:
+        output.to_excel(save_path, sheet_name="schema", index=False)
 
 def create_grading_sheet(
         lab:int | str,
@@ -126,7 +129,10 @@ def create_grading_sheet(
                                 )
     _make_group_column()
     _make_repeat_columns(col_header_map=_interval_calc())
-    workbook.save(load_path)
+    if load_path.exists:
+        raise FileExistsError("Workbook already exists! Delete it first.")
+    else:
+        workbook.save(load_path)
 
 def style_sheets(lab:int | str, output_dir:Path) -> None:
     load_path = output_dir / ('lab' + str(lab) + ".xlsx")
@@ -193,7 +199,10 @@ def style_sheets(lab:int | str, output_dir:Path) -> None:
                     ): # type: ignore
                     for cell in row:
                         cell.border = border_right
-    workbook.save(load_path)
+    if load_path.exists:
+        raise FileExistsError("Workbook already exists! Delete it first.")
+    else:
+        workbook.save(load_path)
 
 if __name__ == "__main__":
     METADATA_PATH = ROOT_DIR / "src" / "metadata.json"
