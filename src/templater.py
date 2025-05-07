@@ -197,6 +197,8 @@ def style_sheets(lab:int | str, output_dir:Path) -> None:
                     for cell in row:
                         cell.border = border_right
 
+    workbook.save(load_path)
+
 if __name__ == "__main__":
     METADATA_PATH = ROOT_DIR / "src" / "metadata.json"
     lab = input("Which lab number do you want to generate a template for? ")
