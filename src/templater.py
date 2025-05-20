@@ -1,4 +1,4 @@
-from config import ROOT_DIR, OUTPUT_PATH 
+from config import ROOT_DIR, WORKBOOK_DIR 
 from openpyxl import load_workbook
 from openpyxl.utils import get_column_letter, column_index_from_string
 from openpyxl.styles import Font, Border, Alignment, PatternFill, Border, Side
@@ -53,7 +53,7 @@ def create_schema_sheet(
         [questions, marks_available, summary, schema, marks, feedback], axis=1
         )
     save_path = output_dir / (lab + ".xlsx")
-    if save_path.exists:
+    if save_path.is_file():
         raise FileExistsError("Workbook already exists! Delete it first.")
     else:
         output.to_excel(save_path, sheet_name="schema", index=False)
@@ -129,10 +129,7 @@ def create_grading_sheet(
                                 )
     _make_group_column()
     _make_repeat_columns(col_header_map=_interval_calc())
-    if load_path.exists:
-        raise FileExistsError("Workbook already exists! Delete it first.")
-    else:
-        workbook.save(load_path)
+    workbook.save(load_path)
 
 def style_sheets(lab:int | str, output_dir:Path) -> None:
     load_path = output_dir / ('lab' + str(lab) + ".xlsx")
@@ -199,10 +196,8 @@ def style_sheets(lab:int | str, output_dir:Path) -> None:
                     ): # type: ignore
                     for cell in row:
                         cell.border = border_right
-    if load_path.exists:
-        raise FileExistsError("Workbook already exists! Delete it first.")
-    else:
-        workbook.save(load_path)
+
+    workbook.save(load_path)
 
 if __name__ == "__main__":
     METADATA_PATH = ROOT_DIR / "src" / "metadata.json"
@@ -218,15 +213,15 @@ if __name__ == "__main__":
         lab=lab, 
         question_array=question_array, 
         schema_array=schema_array, 
-        output_dir=OUTPUT_PATH
+        output_dir=WORKBOOK_DIR
         )
     create_grading_sheet(
         lab=lab, 
         question_array=question_array, 
         schema_array=schema_array, 
-        output_dir=OUTPUT_PATH, 
+        output_dir=WORKBOOK_DIR, 
         total_groups=total_groups
         )
     style_sheets(
         lab=lab,
-        output_dir=OUTPUT_PATH)
+        output_dir=WORKBOOK_DIR)
