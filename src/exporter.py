@@ -135,9 +135,11 @@ def to_html(combined_df:pd.DataFrame, group: int, assignment: int) -> None:
         f.write(html_content)
 
 if __name__ == "__main__":
-    sheet_1 = Path(input("Enter path to first grading sheet, must be in a .csv format: "))
-    sheet_2 = Path(input("Enter path to second grading sheet, must be in a .csv format: "))
-    for group in range(1, 21):
+    assignment_no = int(input("What assignment number is this? "))
+    group_numbers = int(input("How many groups are there? "))
+    sheet_1 = Path(input("Enter path to first grading sheet, must be in a .csv format: ").replace('"', ""))
+    sheet_2 = Path(input("Enter path to second grading sheet, must be in a .csv format: ").replace('"', ""))
+    for group in range(1, group_numbers+1):
         combined_df = combine_dataframes(sheet_1, sheet_2, group, [1,2])
-        to_html(combined_df, group, 1)
+        to_html(combined_df, group, assignment_no)
         print(f"Group {group} saved to HTML!")
